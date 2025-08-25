@@ -1,197 +1,805 @@
-<!DOCTYPE html><html lang="ru"><head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>HAWK RUSSIA - Главная</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&display=swap" rel="stylesheet">
-	<link href="../unpkg.com/aos%402.3.1/dist/aos.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<link rel="icon" href="favicon.svg">
-	<script async="" src="../pagead2.googlesyndication.com/pagead/js/adsbygoogle_client%3Dca-pub-8918712528453332.js" crossorigin="anonymous"></script>
-	<meta name="google-adsense-account" content="ca-pub-8918712528453332">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRMP Project | GTA RolePlay Сервер</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Russo+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-bg: #0d0d0e;
+            --burgundy: #800020;
+            --orange: #ff5c00;
+            --dark-gray: #1a1a1c;
+            --light-text: #f2f2f2;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--light-text);
+            line-height: 1.6;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(128, 0, 32, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(255, 92, 0, 0.1) 0%, transparent 20%),
+                linear-gradient(to bottom, #0d0d0e 0%, #1a1a1a 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background: rgba(13, 13, 14, 0.95);
+            box-shadow: 0 2px 15px rgba(255, 92, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--orange);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: 'Russo One', sans-serif;
+            font-weight: 400;
+            font-size: 28px;
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 92, 0, 0.5);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+            color: var(--burgundy);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light-text);
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+        
+        .nav-links a.active {
+            color: var(--orange);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--orange);
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="rgba(255, 92, 0, 0.05)" stroke-width="2"/></svg>');
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--light-text);
+            animation: fadeIn 1s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 92, 0, 0.7);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #ccc;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .server-info {
+            background: rgba(26, 26, 28, 0.7);
+            border: 1px solid var(--burgundy);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeIn 2s ease;
+        }
+        
+        .server-info p {
+            margin: 10px 0;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .server-info span {
+            color: var(--orange);
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(45deg, var(--burgundy), var(--orange));
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            animation: fadeIn 2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 92, 0, 0.4);
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 92, 0, 0.6);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        /* Features section */
+        .features {
+            padding: 100px 0;
+            background: var(--dark-gray);
+            position: relative;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 75% 25%, rgba(128, 0, 32, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 25% 75%, rgba(255, 92, 0, 0.1) 0%, transparent 20%);
+            z-index: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 92, 0, 0.5);
+        }
+        
+        .section-title p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background: rgba(13, 13, 14, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(128, 0, 32, 0.3);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--orange);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(128, 0, 32, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--orange);
+            font-size: 28px;
+            border: 1px solid var(--burgundy);
+        }
+        
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            color: var(--light-text);
+            font-size: 1.5rem;
+        }
+        
+        /* Privileges section */
+        .privileges {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.2) 0%, rgba(13, 13, 14, 0.8) 100%);
+            position: relative;
+        }
+        
+        .privileges::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="rgba(255, 92, 0, 0.05)" stroke-width="2"/></svg>');
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+        
+        .privileges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .privilege-card {
+            background: rgba(13, 13, 14, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid var(--orange);
+            box-shadow: 0 0 30px rgba(255, 92, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .privilege-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .privilege-card h3 {
+            color: var(--orange);
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+        }
+        
+        .privilege-card .price {
+            font-size: 2rem;
+            color: var(--light-text);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .privilege-list {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .privilege-list li {
+            padding: 8px 0;
+            border-bottom: 1px dotted rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .privilege-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .privilege-list i {
+            color: var(--burgundy);
+            margin-right: 10px;
+        }
+        
+        /* Launcher section */
+        .launcher {
+            padding: 100px 0;
+            background: var(--dark-gray);
+        }
+        
+        .launcher-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .launcher-image {
+            flex: 1;
+            background: linear-gradient(45deg, var(--burgundy), var(--orange));
+            border-radius: 10px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .launcher-info {
+            flex: 1;
+        }
+        
+        .launcher-info h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+        
+        .launcher-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .launcher-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .launcher-features i {
+            color: var(--orange);
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #888;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--burgundy);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--orange);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(128, 0, 32, 0.3);
+            border-radius: 50%;
+            color: var(--light-text);
+            text-decoration: none;
+            transition: background 0.3s;
+            border: 1px solid var(--burgundy);
+        }
+        
+        .social-links a:hover {
+            background: var(--orange);
+            transform: translateY(-3px);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+            border-bottom: 1px dotted rgba(128, 0, 32, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 10px;
+            color: var(--burgundy);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--orange);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(128, 0, 32, 0.3);
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 92, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 92, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 92, 0, 0); }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features-grid, .privileges-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .launcher-content {
+                flex-direction: column;
+            }
+            
+            .launcher-image {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* GTA themed elements */
+        .gta-theme {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            margin: 30px 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
-
 <body>
-	<div class="page_home">
-		<header>
-			<div class="size">
-				<div class="head_cont">
-					<a href="/">
-						<img src="assets/img/head_ico_1.svg" alt="">
-						<span>главная</span>
-					</a>
-					<a href="/pay">
-						<img src="assets/img/head_ico_2.svg" alt="">
-						<span>донат</span>
-					</a>
-					<a href="https://forum.crime-mobile.net">
-						<img src="assets/img/head_ico_3.svg" alt="">
-						<span>форум</span>
-					</a>
-				</div>
-			</div>
-		</header>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>CRMP Project</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#privileges"><i class="fas fa-crown"></i> Привилегии</a></li>
+                    <li><a href="#launcher"><i class="fas fa-desktop"></i> Лаунчер</a></li>
+                    <li><a href="#"><i class="fab fa-telegram"></i> Telegram</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-		<section class="home_block">
-			<div class="size">
-				<div class="cont_left" data-aos="fade-right">
-					<a href="index.html" class="logo">
-						<img src="assets/img/logo.png" alt="">
-					</a>
-					<h1>Играй в <span>CRMP</span> <br>
-						на своем смартфоне</h1>
-					<div class="row_txt">
-						Законы улиц - это законы выживания. Готовы играть? - <span>CRIME MOBILE</span>
-					</div>
-					<a href="https://launcher.goldmobile.net/cdn/mobile-game-release.apk" class="sb_get">
-						<img src="assets/img/play.png" alt="">
-						<span>начать игру</span>
-					</a>
-				</div>
-			</div>
-		    <img src="assets/img/man.png" alt="" class="man">
-			<img src="assets/img/vector.svg" alt="" class="vector" data-aos="fade-up">
-			<div class="radial" data-aos="zoom-in"></div>
-		</section>
-		<section class="block_content">
-			<div class="size">
-				<h2 data-aos="fade-up">
-					<span class="bg"><span>ПОЧЕМУ</span></span><br>
-					ИМЕННО МЫ?
-				</h2>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>GTA RolePlay CRMP Сервер</h1>
+                <p>Лучший русскоязычный RolePlay проект с уникальным лаунчером и эксклюзивными возможностями!</p>
+                
+                <div class="server-info">
+                    <p>Сервер онлайн: <span>24/7</span></p>
+                    <p>Игроков онлайн: <span>187/200</span></p>
+                    <p>Версия: <span>CRMP 0.4.0</span></p>
+                    <p>Режим: <span>Ролевой (RolePlay)</span></p>
+                </div>
+                
+                <a href="#" class="btn pulse"><i class="fas fa-download"></i> Скачать лаунчер</a>
+                <a href="#" class="btn"><i class="fab fa-telegram"></i> Наш Telegram</a>
+            </div>
+        </div>
+    </section>
 
-				<div class="cont_row">
-					<div class="row">
-						<img src="assets/img/img_1.png" alt="" data-aos="fade-right">
-						<div class="txt" data-aos="fade-left">
-							<h3>
-								<span>ВОТ ПОЧЕМУ!</span>
-								У НАС ЕСТЬ
-							</h3>
-							<p>Много крутых и проработанных фракций
-								у вас уже будет 15.000 игровой валюты
-								на развитие или дешевую машинку.</p>
-						</div>
-					</div>
-					<div class="row">
-						<img src="assets/img/img_2.png" alt="" data-aos="fade-left">
-						<div class="txt" data-aos="fade-right">
-							<h3>
-								<span>Неповторимые</span>
-								возможности
-							</h3>
-							<p>Только на Hawk Russia вы найдёте уникальные системы,
-								которые не встретите нигде больше.
-								Погрузитесь в эксклюзивные механики
-								и возможности, доступные исключительно у нас.</p>
-						</div>
-					</div>
-					<div class="row">
-						<img src="assets/img/img_3.png" alt="" data-aos="fade-right">
-						<div class="txt" data-aos="fade-left">
-							<h3>
-								<span>Ваш голос</span>
-								важен для нас
-							</h3>
-							<p>На нашем проекте мы ценим каждого игрока.
-								Именно по вашим просьбам и предложениям
-								формируются наши обновления.
-								Присоединяйтесь и влияйте
-								на развитие игры вместе с нами!</p>
-						</div>
-					</div>
-				</div>
-				<h2 data-aos="fade-up">
-					<span class="bg"><span>УБЕДИСЬ </span></span><br>
-					ЧТО МЫ ЛУЧШЕ!
-				</h2>
+    <div class="divider"></div>
 
-				<div class="cont_slick">
-					<div class="item">
-						<img src="assets/img/slide_1.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="assets/img/slide_2.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="assets/img/slide_3.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="assets/img/slide_4.jpg" alt="">
-					</div>
-				</div>
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши преимущества</h2>
+                <p>Почему наш CRMP сервер лучший выбор для RolePlay</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Уникальный лаунчер</h3>
+                    <p>Автоматическое обновление, быстрый запуск и удобный интерфейс</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Защита от читеров</h3>
+                    <p>Продвинутая античит система обеспечивает честную игру</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Экономика</h3>
+                    <p>Реалистичная экономическая система с бизнесом и работой</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				<div class="cont_soc">
-					<div class="row">
-						<img src="assets/img/ico_tg.svg" alt="">
-						<div class="txt">
-							<h4>Наш Telegram</h4>
-							<a href="https://t.me/projectha_wk" class="sb">Подписаться</a>
-						</div>
-					</div>
+    <section id="privileges" class="privileges">
+        <div class="container">
+            <div class="section-title">
+                <h2>Привилегии</h2>
+                <p>Улучшите свой игровой опыт с нашими привилегиями</p>
+            </div>
+            
+            <div class="privileges-grid">
+                <div class="privilege-card">
+                    <h3>STANDART</h3>
+                    <div class="price">299₽</div>
+                    <ul class="privilege-list">
+                        <li><i class="fas fa-check"></i> 50.000 игровой валюты</li>
+                        <li><i class="fas fa-check"></i> Доступ к базовым командам</li>
+                        <li><i class="fas fa-check"></i> Возможность создать организацию</li>
+                        <li><i class="fas fa-check"></i> Цветной ник в чате</li>
+                        <li><i class="fas fa-check"></i> Доступ к /report</li>
+                    </ul>
+                    <a href="#" class="btn">Купить</a>
+                </div>
+                
+                <div class="privilege-card">
+                    <h3>PREMIUM</h3>
+                    <div class="price">799₽</div>
+                    <ul class="privilege-list">
+                        <li><i class="fas fa-check"></i> 200.000 игровой валюты</li>
+                        <li><i class="fas fa-check"></i> Все возможности STANDART</li>
+                        <li><i class="fas fa-check"></i> Доступ к премиум транспорту</li>
+                        <li><i class="fas fa-check"></i> Возможность снять розыск</li>
+                        <li><i class="fas fa-check"></i> Увеличенный инвентарь</li>
+                        <li><i class="fas fa-check"></i> Приоритет в подключении</li>
+                    </ul>
+                    <a href="#" class="btn">Купить</a>
+                </div>
+                
+                <div class="privilege-card">
+                    <h3>VIP</h3>
+                    <div class="price">1499₽</div>
+                    <ul class="privilege-list">
+                        <li><i class="fas fa-check"></i> 500.000 игровой валюты</li>
+                        <li><i class="fas fa-check"></i> Все возможности PREMIUM</li>
+                        <li><i class="fas fa-check"></i> Эксклюзивный транспорт</li>
+                        <li><i class="fas fa-check"></i> Доступ к VIP-командам</li>
+                        <li><i class="fas fa-check"></i> Личный помощник</li>
+                        <li><i class="fas fa-check"></i> Возможность телепортации</li>
+                        <li><i class="fas fa-check"></i> Золотая карта скидок</li>
+                    </ul>
+                    <a href="#" class="btn">Купить</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-					<div class="row">
-						<img src="assets/img/ico_dis.svg" alt="">
-						<div class="txt">
-							<h4>Наш Discord</h4>
-							<a href="soon" class="sb">Подписаться</a>
-						</div>
-					</div>
+    <section id="launcher" class="launcher">
+        <div class="container">
+            <div class="launcher-content">
+                <div class="launcher-image">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="launcher-info">
+                    <h2>Эксклюзивный лаунчер</h2>
+                    <p>Наш собственный лаунчер делает процесс игры максимально удобным. Больше не нужно вручную обновлять файлы и настраивать подключение - всё происходит автоматически!</p>
+                    
+                    <ul class="launcher-features">
+                        <li><i class="fas fa-check"></i> Автоматическое обновление клиента</li>
+                        <li><i class="fas fa-check"></i> Быстрое подключение к серверу</li>
+                        <li><i class="fas fa-check"></i> Встроенная статистика игроков</li>
+                        <li><i class="fas fa-check"></i> Система уведомлений о событиях</li>
+                        <li><i class="fas fa-check"></i> Настройка графики в один клик</li>
+                    </ul>
+                    
+                    <a href="#" class="btn"><i class="fas fa-download"></i> Скачать лаунчер</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-					<div class="row">
-						<img src="assets/img/ico_vk.svg" alt="">
-						<div class="txt">
-							<h4>Мы ВКонтакте</h4>
-							<a href="https://vk.com/soooooooooooooooooooooooooooooooooooon" class="sb">Подписаться</a>
-						</div>
-					</div>
-				</div>
-			</div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О CRMP Project</h3>
+                    <p>Лучший русскоязычный RolePlay сервер на базе GTA San Andreas. Мы предлагаем уникальный игровой опыт с 2018 года.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-download"></i> Скачать лаунчер</a></li>
+                        <li><a href="#privileges"><i class="fas fa-crown"></i> Привилегии</a></li>
+                        <li><a href="#"><i class="fas fa-hand-holding-usd"></i> Донат</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> База знаний</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> admin@crmp-project.ru</a></li>
+                        <li><a href="#"><i class="fab fa-telegram"></i> Telegram чат</a></li>
+                        <li><a href="#"><i class="fab fa-vk"></i> Группа ВКонтакте</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CRMP Project. Все права защищены. GTA и Grand Theft Auto являются товарными знаками Take-Two Interactive Software Inc.</p>
+            </div>
+        </div>
+    </footer>
 
-
-
-			<div class="radial" data-aos="zoom-in"></div>
-			<div class="radial_2" data-aos="zoom-in"></div>
-			<div class="radial_3" data-aos="zoom-in"></div>
-		</section>
-
-	</div>
-
-	<footer>
-		<div class="size">
-			<div class="foot_cont">
-				<div class="foot_left">
-					<a href="https://crime-mobile.net/privacy.html">Политика конфиденциальности</a>
-					<a href="https://crime-mobile.net/agreement.html">Пользовательское соглашение</a>
-					<p>Почта для связи: <a href="mailto:">contact@crime-mobile.net</a></p>
-				</div>
-
-				<a href="https://crime-mobile.net" class="logo">
-					<img src="assets/img/logo.png" alt="">
-				</a>
-			</div>
-						<div class="copy">
-				Игра бесплатная и не требует внесения денежных средств. На странице "Донат" вы можете поддержать проект пожертвованиями, но это не обязательно.<br>
-                Все торговые марки, упомянутые на сайте, принадлежат их соответствующим владельцам. <br></div>
-		</div>
-		<div class="radial"></div>
-		<div class="radial_2"></div>
-	</footer>
-
-	<script src="assets/js/jquery-3.7.0.min.js"></script>
-	<script src="../unpkg.com/aos%402.3.1/dist/aos.js"></script>
-	<script src="assets/js/slick.min.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script>
-		AOS.init({
-			duration: 800, // values from 0 to 3000, with step 50ms
-			disable: 'phone', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-		}
-		);
-	</script>
-
-
-
-</body></html>
+    <script>
+        // Обновление количества игроков онлайн (заглушка)
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateOnlinePlayers() {
+                const onlineElement = document.querySelector('.server-info p:nth-child(2) span');
+                const randomChange = Math.floor(Math.random() * 5) - 2;
+                const currentPlayers = parseInt(onlineElement.textContent.split('/')[0]);
+                const maxPlayers = 200;
+                
+                let newPlayers = currentPlayers + randomChange;
+                if (newPlayers < 170) newPlayers = 170;
+                if (newPlayers > 197) newPlayers = 197;
+                
+                onlineElement.textContent = `${newPlayers}/${maxPlayers}`;
+            }
+            
+            setInterval(updateOnlinePlayers, 60000);
+            
+            // Плавная прокрутка к якорям
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
