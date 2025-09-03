@@ -3,107 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Системное сообщение</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>⚠️ Системное предупреждение</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
             background-color: #000;
-            color: #fff;
+            color: #ff4444;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .glitch-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .glitch {
+            font-size: 3.5rem;
+            font-weight: bold;
+            position: relative;
+            text-shadow: 2px 2px 0px #00ffea, -2px -2px 0px #ff00ff;
+            animation: glitch-effect 3s infinite;
+        }
+        @keyframes glitch-effect {
+            0% { text-shadow: 2px 2px 0px #00ffea, -2px -2px 0px #ff00ff; }
+            50% { text-shadow: -2px -2px 0px #00ffea, 2px 2px 0px #ff00ff; }
+            100% { text-shadow: 2px 2px 0px #00ffea, -2px -2px 0px #ff00ff; }
         }
         .warning-icon {
-            font-size: 60px;
-            color: #ff4444;
+            font-size: 4rem;
             margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         .countdown {
-            font-size: 28px;
+            font-size: 2.8rem;
             font-weight: bold;
-            color: #ff4444;
-            margin: 30px 0;
+            margin: 25px 0;
             font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
         }
-        .progress-bar {
-            width: 80%;
-            height: 20px;
-            background-color: #333;
-            border-radius: 10px;
+        .progress-container {
+            width: 90%;
+            max-width: 500px;
+            background-color: #222;
+            border-radius: 15px;
             overflow: hidden;
             margin: 20px 0;
+            border: 1px solid #ff4444;
         }
-        .progress {
-            height: 100%;
+        .progress-bar {
+            height: 30px;
             width: 0%;
-            background-color: #ff4444;
-            transition: width 0.1s linear;
+            background: linear-gradient(90deg, #ff0000, #ff4444);
+            transition: width 0.5s ease;
         }
         .message {
-            font-size: 16px;
+            font-size: 1.2rem;
             color: #ccc;
-            margin-top: 20px;
-            max-width: 80%;
+            margin-top: 25px;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00ffea, transparent);
+            animation: scan 3s linear infinite;
+            opacity: 0.7;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+        .error-code {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: #00ffea;
+            opacity: 0.7;
+        }
+        #fullscreenButton {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            padding: 8px 15px;
+            background: #333;
+            color: white;
+            border: 1px solid #ff4444;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+    <div class="scan-line"></div>
+    <button id="fullscreenButton" onclick="openFullscreen()">АКТИВИРОВАТЬ</button>
+
+    <div class="glitch-container">
+        <div class="glitch">#ОШИБКА 0x7B</div>
+    </div>
 
     <div class="warning-icon">⚠️</div>
-    <h1>КРИТИЧЕСКИЙ СБОЙ СИСТЕМЫ</h1>
-    <p>Обнаружено несанкционированное вмешательство.</p>
     
-    <div class="countdown" id="countdown">Инициализация...</div>
+    <h1>КРИТИЧЕСКИЙ СБОЙ ФАЙЛОВОЙ СИСТЕМЫ</h1>
+    <p>Обнаружено повреждение системных секторов.</p>
     
-    <div class="progress-bar">
-        <div class="progress" id="progress"></div>
+    <div class="countdown" id="countdown">02:00.000</div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
     </div>
     
-    <p class="message">Идет процесс удаления данных. Не прерывайте работу устройства.</p>
+    <p class="message">Идет восстановление загрузочных секторов...<br>Не выключайте устройство. Прерывание процесса приведет к потере данных.</p>
+    <p class="message" id="additionalMessage" style="color: #00ffea; margin-top: 10px;"></p>
+
+    <div class="error-code">SYS_ERR::0x7B_CRITICAL_FAILURE</div>
+
+    <audio id="scarySound" loop>
+        <source src="https://dl.sndup.net/gxd2d/Tt_-_fnaf_jr_Mangle_theme_(mp3.mn).mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Настройки таймера (5 секунд в миллисекундах)
-        const totalTime = 5000; 
-        const interval = 10; // Обновление каждые 10 миллисекунд для плавности
+        // Настройки таймера (2 минуты = 120000 миллисекунд)
+        const totalTime = 120000; // 120 секунд
+        const interval = 10; // Обновление каждые 10 мс
         let timeLeft = totalTime;
         const countdownElement = document.getElementById('countdown');
         const progressElement = document.getElementById('progress');
+        const scarySound = document.getElementById('scarySound');
+        const additionalMessage = document.getElementById('additionalMessage');
+
+        // Сообщения, которые будут появляться во время отсчета
+        const errorMessages = [
+            "Обнаружено вредоносное ПО в секторе 0x7B...",
+            "Сканирование памяти... Обнаружены поврежденные кластеры",
+            "Попытка восстановления загрузочной записи...",
+            "Доступ к ядру системы ограничен...",
+            "Проверка целостности системных файлов...",
+            "Очистка кэша поврежденных данных...",
+            "Инициализация аварийного протокола...",
+            "Резервное копирование пользовательских данных...",
+            "Доступ к сети заблокирован системой безопасности..."
+        ];
+
+        function formatTime(ms) {
+            let seconds = Math.floor(ms / 1000);
+            let minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+            let milliseconds = ms % 1000;
+            
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+        }
+
+        function openFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(e => console.log(e));
+            }
+            scarySound.play().catch(e => {
+                console.log("Автовоспроизведение заблокировано.");
+            });
+            document.getElementById('fullscreenButton').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            openFullscreen();
+            scarySound.play().catch(e => {
+                document.getElementById('fullscreenButton').style.display = 'block';
+            });
+            
+            // Показываем случайное сообщение каждые 10 секунд
+            setInterval(() => {
+                if (timeLeft > 0) {
+                    const randomMessage = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                    additionalMessage.textContent = randomMessage;
+                    
+                    // Исчезаем через 5 секунд
+                    setTimeout(() => {
+                        additionalMessage.textContent = '';
+                    }, 5000);
+                }
+            }, 10000);
+        });
 
         function updateScreen() {
             timeLeft -= interval;
             
             // Обновляем таймер
-            countdownElement.textContent = (timeLeft / 1000).toFixed(3) + ' с';
+            countdownElement.textContent = formatTime(timeLeft);
             
             // Обновляем полосу прогресса
             let progress = 100 - (timeLeft / totalTime * 100);
             progressElement.style.width = progress + '%';
 
+            // Меняем цвет в зависимости от оставшегося времени
+            if (progress > 80) {
+                progressElement.style.background = 'linear-gradient(90deg, #ff0000, #990000)';
+            }
+
             // Когда время вышло
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                countdownElement.textContent = "0.000 с";
+                countdownElement.textContent = "00:00.000";
                 progressElement.style.width = '100%';
+                progressElement.style.background = 'linear-gradient(90deg, #ff0000, #000000)';
                 
-                // Показываем сообщение "Это пранк!" через секунду после окончания
+                // Останавливаем страшную музыку
+                scarySound.pause();
+                
+                // Финальное сообщение
                 setTimeout(() => {
                     document.body.innerHTML = `
-                        <div style="text-align: center;">
-                            <h1 style="font-size: 48px; color: #4CAF50;">🤡 ТАДААМ! 🤡</h1>
-                            <p style="font-size: 24px;">Это был пранк!<br>Твоя система в полной безопасности.</p>
+                        <div style="text-align: center; background: black; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <h1 style="font-size: 3.5rem; color: #4CAF50; margin-bottom: 20px;">🤡 ТАДААМ! 🤡</h1>
+                            <p style="font-size: 1.5rem; color: white;">Это был пранк!</p>
+                            <p style="font-size: 1.2rem; color: #ccc; margin-top: 10px;">Твоя система в полной безопасности.</p>
+                            <p style="color: #666; margin-top: 30px;">Над тобой пошутили через NFC 😉</p>
                         </div>
                     `;
-                }, 1000);
+                }, 2000);
             }
         }
 
-        // Запускаем таймер
         let timer = setInterval(updateScreen, interval);
+        
+        // Добавляем эффект мерцания текста
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                document.body.style.opacity = 0.9;
+                setTimeout(() => {
+                    document.body.style.opacity = 1;
+                }, 100);
+            }
+        }, 3000);
+
     </script>
 </body>
 </html>
